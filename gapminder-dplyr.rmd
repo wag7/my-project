@@ -1,0 +1,102 @@
+---
+title: "gapminder-dplyr.rmd"
+author: "Wagner Quiros Pereira"
+date: "April 16, 2016"
+output: html_document
+---
+
+
+
+##Exploration
+
+
+```{r}
+## install.packages("dplyr") # only to be done once.!!
+library(dplyr) # everytime I reestart R and nee dplyr.
+
+```
+
+#Load gapminder
+
+You can also embed plots, for example:
+
+```{r}
+
+install.packages("gapminder")
+
+library(gapminder) # install.packages("gapminder")
+str(gapminder)
+
+```
+
+
+
+#Exploration with gapfinder
+```{r}
+
+filter(gapminder, lifeExp <29)
+filter(gapminder, country == "Rwanda")
+a <- filter(gapminder, country %in% c("Rwanda", "Afghanistan"))
+
+# compare with dplyr
+gapminder[gapminder$lifeExp <29, ]
+subset(gapminder, country == "Rwanda")
+
+#the pipe pperator !! %>% Command shift m.
+#from magrittr package.
+
+gapminder %>% head # bellow is doing the same.
+head(gapminder) #same as before
+
+## subset with command select
+select(gapminder, year, lifeExp) # 
+gapminder %>% select(year, lifeExp)
+
+gapminder %>%  # %>% retakes information in a different order.
+  select(year, lifeExp) %>%  # operator.
+  head(4)
+
+# mean GDP for Cambodia.
+gapminder %>% 
+  filter(country == "Cambodia") %>%
+  select(country, year, pop, gdpPercap)
+
+
+
+#another option if we have too many columns above.
+# mean GDP for Cambodia.
+gapminder %>% 
+  filter(country == "Cambodia") %>%
+  select(-continent, - lifeExp)
+#another option if we have too many columns above.
+  
+#Compare to base R
+gapminder[gapminder$country == "Cambodia", c("country", "year", "pop", "gdpPercap")]
+
+# Cotinue to mutate
+gapminder %>% 
+  mutate(gdp = pop * gdpPercap)
+
+#exersice
+#add mutate function to previous analysis.
+
+gapminder %>% 
+  filter(country == "Cambodia") %>%
+  select(country, year, pop, gdpPercap) %>% 
+  mutate(gdp = pop * gdpPercap) %>% 
+  group_by(country) %>% 
+  summarise(mean_gdp = mean(gdp)) %>% 
+  ungroup() # do it when group_by.# ehlps get all the data means if necesary.
+  
+# ## with a  for loop
+# for (country in all_countries) {
+#   our analysis
+# 
+# }
+
+```
+
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
