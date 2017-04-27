@@ -1,0 +1,81 @@
+---
+title: "Assignment_1"
+author: "Wagner Quiros Pereira"
+date: "4/25/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+**Monthly precipitation**
+
+```{r clim}
+climate = read.table("clim.txt", header=T)
+boxplot(climate$rain~climate$month,
+  ylab="Precipitation/inches",
+  xlab="month", col="blue")
+```
+
+
+**Monthly minimum average temperature**
+
+```{r clim2}
+climate = read.table("clim.txt", header=T)
+boxplot(climate$tmin~climate$month,
+  ylab="Average of Minimum Temperature/Fahrenheit",
+  xlab="month", col="lightblue")
+```
+
+**Monthly maximum average temperature**
+
+```{r clim3}
+climate = read.table("clim.txt", header=T)
+boxplot(climate$tmax~climate$month,
+  ylab="Average of Maximum Temperature/Fahrenheit",
+  xlab="month", col="blue")
+```
+
+
+**Annual rain A**
+
+```{r clim4}
+rainfall= read.table("clim.txt", header=T)
+boxplot(rainfall$rain~rainfall$year,
+  ylab="Precipitation/inches/year",
+  xlab="year", col="orange")
+```
+
+
+
+**Wettest year**
+```{r clim6}
+result=which.max(rainfall$rain)
+rainfall[result,]
+```
+
+**Driest year**
+```{r clim7}
+result=which.min(rainfall$rain)
+rainfall[result,]
+```
+
+**Wet and Dry Season Picture**
+
+<div align="center">
+<img src="img/Guanacaste.jpg" height=400>
+</div>
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
