@@ -13,61 +13,82 @@ knitr::opts_chunk$set(echo = TRUE)
 
 **Monthly precipitation**
 
-```{r clim}
+```{r clim, fig.align='center'}
 climate = read.table("clim.txt", header=T)
 boxplot(climate$rain~climate$month,
   ylab="Precipitation/inches",
-  xlab="month", col="blue")
+  xlab="Month", col="blue")
 ```
 
 
 **Monthly minimum average temperature**
 
-```{r clim2}
+```{r clim2, fig.align='center'}
 climate = read.table("clim.txt", header=T)
 boxplot(climate$tmin~climate$month,
   ylab="Average of Minimum Temperature/Fahrenheit",
-  xlab="month", col="lightblue")
+  xlab="Month", col="lightblue")
 ```
 
 **Monthly maximum average temperature**
 
-```{r clim3}
+```{r clim3, fig.align='center'}
 climate = read.table("clim.txt", header=T)
 boxplot(climate$tmax~climate$month,
   ylab="Average of Maximum Temperature/Fahrenheit",
-  xlab="month", col="blue")
+  xlab="Month", col="blue")
 ```
 
 
 **Annual rain A**
 
-```{r clim4}
+```{r clim4, fig.align='center'}
 rainfall= read.table("clim.txt", header=T)
 boxplot(rainfall$rain~rainfall$year,
   ylab="Precipitation/inches/year",
-  xlab="year", col="orange")
+  xlab="Year", col="orange")
 ```
 
+**Annual Mean Rainfall**
+```{r climX, fig.align='center'}
+YearMeanST <- aggregate (rainfall$rain ~ year, data = rainfall, FUN = function(x) {c(MEAN = mean(x), SD= sd (x))})
+names(YearMeanST) 
+YearMeanSTTable <- do.call(data.frame, YearMeanST)
+colnames(YearMeanSTTable) <- c("Year", "Mean", "SD")
+View(YearMeanSTTable)
+boxplot(YearMeanSTTable$Mean~YearMeanSTTable$Year,
+ ylab="Mean Precipitation/inches/year",
+ xlab="Year", col="blue")
+```
 
-
-**Wettest year**
+**Wettest year using the mean**
 ```{r clim6}
-result=which.max(rainfall$rain)
-rainfall[result,]
+result=which.max(YearMeanSTTable$Mean)
+YearMeanSTTable[result,]
 ```
 
-**Driest year**
+
+**Driest year using the mean**
 ```{r clim7}
-result=which.min(rainfall$rain)
-rainfall[result,]
+result=which.min(YearMeanSTTable$Mean)
+YearMeanSTTable[result,]
 ```
 
-**Wet and Dry Season Picture**
+**Wet and Dry Season Picture from Guanacaste, Costa Rica. Tropical Dry Forest**
 
 <div align="center">
-<img src="img/Guanacaste.jpg" height=400>
+<img src="Guanacaste.jpg" height=400>
 </div>
+
+
+**Subsetting seasons**
+```{r clim8}
+WINTER <- subset(climate, climate$month < 4)
+```
+
+
+
+
 
 
 ## Including Plots
