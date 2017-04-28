@@ -38,8 +38,15 @@ Some nice examples of commonly used greek symbols and functions more latex
 
 $$ \frac{1}{n} \sum_{i=i}^{n} x_{i} $$
 
-
-
+```{r sun, echo=T}
+sun=read.table("sun.txt", header=T)
+head(sun)
+range(sun$year)
+# divide into 3 period, beginning, middle, end
+sun$period = ifelse(sun$year %in% c(1944,1945, 1946),"start",
+              ifelse(sun$year %in%  c(1953,1954),"middle","end"))
+boxplot(sun$Kdown_direct~sun$period)
+```
 
 ## Including Plots
 

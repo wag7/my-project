@@ -2,14 +2,14 @@
 title: "Assignment_1"
 author: "Wagner Quiros Pereira"
 date: "4/25/2017"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## R Markdown Practice
 
 **Monthly precipitation**
 
@@ -57,7 +57,7 @@ YearMeanSTTable <- do.call(data.frame, YearMeanST)
 colnames(YearMeanSTTable) <- c("Year", "Mean", "SD")
 View(YearMeanSTTable)
 boxplot(YearMeanSTTable$Mean~YearMeanSTTable$Year,
- ylab="Mean Precipitation/inches/year",
+ ylab="Average Precipitation/inches/year",
  xlab="Year", col="blue")
 ```
 
@@ -82,22 +82,40 @@ YearMeanSTTable[result,]
 
 
 **Subsetting seasons**
-```{r clim8}
-WINTER <- subset(climate, climate$month <3)
-winter <- climate$month (climate$month[1:2])
+```{r clim8, fig.align='center'}
+View(climate)
+range(climate$month)
+climate$period <- ifelse(climate$month %in% c(3,4,5),"Spring",
+ifelse(climate$month %in% c(6,7,8), "Summer",
+ifelse(climate$month %in% c(9,10,11), "Fall", "Winter")))
+boxplot(climate$rain~climate$period,
+ylab="Mean Precipitation/inches/year",
+xlab="Year", col="blue")
+```
+
+```{r clim9, fig.align='center'}
+SeasonMeanSD <- aggregate (climate$rain ~ period, data = climate, FUN = function(x) {c(MEAN = mean(x), SD= sd (x))})
+names(SeasonMeanSD)
+SeasonMeanSTTable <- do.call(data.frame, SeasonMeanSD)
+colnames(SeasonMeanSTTable) <- c("Period", "Mean", "SD")
+View(SeasonMeanSTTable)
+boxplot(SeasonMeanSTTable$Mean~SeasonMeanSTTable$Period,
+ ylab="Average Precipitation/inches/year",
+ xlab="Period", col="blue")
+```
+
+**Driest season using the mean**
+```{r clim10}
+result=which.min(SeasonMeanSD$`climate$rain`)
+SeasonMeanSD[result,]
+```
+
+**Wettest season using the mean**
+```{r clim11}
+result=which.max(SeasonMeanSTTable$Mean)
+SeasonMeanSD[result,]
 ```
 
 
 
 
-
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
