@@ -111,10 +111,8 @@ SeasonMeanSD[result,]
 ```
 
 **Wettest season using the mean**
-```{r clim11}
-result=which.max(SeasonMeanSTTable$Mean)
-SeasonMeanSD[result,]
-```
+
+
 
 
 
