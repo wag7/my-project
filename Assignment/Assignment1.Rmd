@@ -83,7 +83,8 @@ YearMeanSTTable[result,]
 
 **Subsetting seasons**
 ```{r clim8}
-WINTER <- subset(climate, climate$month < 4)
+WINTER <- subset(climate, climate$month <3)
+winter <- climate$month (climate$month[1:2])
 ```
 
 

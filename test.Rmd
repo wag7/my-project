@@ -1,0 +1,55 @@
+---
+title: "test"
+author: "Wagner Quiros Pereira"
+date: "4/24/2017"
+output: 
+html_document: default
+slidy_presentation: null
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+**This is my R markdown document that I am testing for Informatics Course in 2017 Spring** _Dermochelys coriacea_
+
+* Objective 1
+* Objective 2
+* Objetive 3
+
+##IMAGE NEEDED.
+
+<div align="center"> 
+<img src="img/Australia.png" height=400>
+</div>
+
+
+
+[Latex](https://en.wikibooks.org/wiki/LaTeX)
+
+
+Surrount your math in $ symbols
+
+Uses Latex markup language for equations as input.
+
+Some nice examples of commonly used greek symbols and functions more latex
+
+$$ \frac{1}{n} \sum_{i=i}^{n} x_{i} $$
+
+
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
