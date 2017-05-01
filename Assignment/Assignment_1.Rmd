@@ -2,7 +2,7 @@
 title: "Assignment_1"
 author: "Wagner Quiros Pereira"
 date: "4/25/2017"
-output: pdf_document
+output: slidy_presentation
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +20,7 @@ boxplot(climate$rain~climate$month,
   xlab="Month", col="blue")
 ```
 
-
+***
 **Monthly minimum average temperature**
 
 ```{r clim2, fig.align='center'}
@@ -30,6 +30,7 @@ boxplot(climate$tmin~climate$month,
   xlab="Month", col="lightblue")
 ```
 
+***
 **Monthly maximum average temperature**
 
 ```{r clim3, fig.align='center'}
@@ -39,7 +40,7 @@ boxplot(climate$tmax~climate$month,
   xlab="Month", col="blue")
 ```
 
-
+***
 **Annual rain A**
 
 ```{r clim4, fig.align='center'}
@@ -49,7 +50,9 @@ boxplot(rainfall$rain~rainfall$year,
   xlab="Year", col="orange")
 ```
 
+***
 **Annual Mean Rainfall**
+
 ```{r climX, fig.align='center'}
 YearMeanST <- aggregate (rainfall$rain ~ year, data = rainfall, FUN = function(x) {c(MEAN = mean(x), SD= sd (x))})
 names(YearMeanST) 
@@ -61,18 +64,23 @@ boxplot(YearMeanSTTable$Mean~YearMeanSTTable$Year,
  xlab="Year", col="blue")
 ```
 
+***
 **Wettest year using the mean**
+
 ```{r clim6}
 result=which.max(YearMeanSTTable$Mean)
 YearMeanSTTable[result,]
 ```
 
-
+***
 **Driest year using the mean**
+
 ```{r clim7}
 result=which.min(YearMeanSTTable$Mean)
 YearMeanSTTable[result,]
 ```
+
+***
 
 **Wet and Dry Season Picture from Guanacaste, Costa Rica. Tropical Dry Forest**
 
@@ -80,8 +88,9 @@ YearMeanSTTable[result,]
 <img src="Guanacaste.jpg" height=400>
 </div>
 
-
+***
 **Subsetting seasons**
+
 ```{r clim8, fig.align='center'}
 View(climate)
 range(climate$month)
@@ -93,6 +102,7 @@ ylab="Mean Precipitation/inches/year",
 xlab="Year", col="blue")
 ```
 
+***
 ```{r clim9, fig.align='center'}
 SeasonMeanSD <- aggregate (climate$rain ~ period, data = climate, FUN = function(x) {c(MEAN = mean(x), SD= sd (x))})
 names(SeasonMeanSD)
@@ -104,6 +114,7 @@ boxplot(SeasonMeanSTTable$Mean~SeasonMeanSTTable$Period,
  xlab="Period", col="blue")
 ```
 
+***
 **Driest season using the mean**
 ```{r clim10}
 result=which.min(SeasonMeanSD$`climate$rain`)
