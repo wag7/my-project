@@ -123,8 +123,8 @@ $(document).ready(function () {
 </div>
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
+<div id="r-markdown-practice" class="section level2">
+<h2>R Markdown Practice</h2>
 <p><strong>Monthly precipitation</strong></p>
 <pre class="r"><code>climate = read.table(&quot;clim.txt&quot;, header=T)
 boxplot(climate$rain~climate$month,
@@ -200,11 +200,6 @@ boxplot(SeasonMeanSTTable$Mean~SeasonMeanSTTable$Period,
 SeasonMeanSD[result,]</code></pre>
 <pre><code>##   period climate$rain.MEAN climate$rain.SD
 ## 3 Summer         0.1909786       1.6607996</code></pre>
-<p><strong>Wettest season using the mean</strong></p>
-<pre class="r"><code>result=which.max(SeasonMeanSTTable$Mean)
-SeasonMeanSD[result,]</code></pre>
-<pre><code>##   period climate$rain.MEAN climate$rain.SD
-## 4 Winter          5.802871       17.226921</code></pre>
 </div>
 
 
